@@ -116,3 +116,7 @@ article div p {
 button:hover {
   cursor: pointer;
 }
+
+.active {
+  background: red;
+}

@@ -20,9 +20,23 @@ const handleCardContainerClicks = (e) => {
   if (e.target.className === 'delete') {
     deleteIdea(e)
   }
+
+  if(e.target.classList.contains('star')) {
+    handleStarClick(e)
+  }
 }
 
-updateLocalStorage = () => {
+const handleStarClick = (e) => {
+  let id = e.target.closest('article').getAttribute('data-id');
+  let idea = ideas.find(idea => idea.id === parseInt(id));
+  idea.starred ? idea.starred = false : idea.starred = true;
+  ideas.splice(1, ideas.indexOf(idea))
+  updateLocalStorage();
+  e.target.classList.toggle('active')
+  console.log(e.target)
+}
+
+const updateLocalStorage = () => {
   localStorage.setItem('ideas', JSON.stringify(ideas))
 }
 
