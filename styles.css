@@ -2,6 +2,8 @@
   box-sizing: border-box;
 }
 
+
+
 html {
   padding: 0;
   margin: 0;
@@ -13,17 +15,25 @@ body {
   flex-direction: row;
   margin: 0;
   min-height: 100vh;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Times New Roman', serif;
 }
 
 
 /* nav styles */
 nav {
   min-width: 200px;
-  background: lightblue;
+  background: #00807F;
   padding: 20px;
   min-height: 100vh;
   height: auto;
+}
+
+nav div {
+  border: 5px ridge lightgray;
+  background: lightgray;
+  margin: 20px;
+  padding: 20px;
+  box-shadow: 2px 2px 2px .5px black;
 }
 
 nav div,
@@ -38,7 +48,7 @@ main {
   display: flex;
   flex-direction: column;
   width: 100%;
-  background-color: lightyellow;
+  background-color: #00807F;
   align-items: center;
   min-height: 100vh;
 }
@@ -47,18 +57,32 @@ main form {
   display: flex;
   flex-direction: column;
   width: 300px;
-  background: pink;
+  background: lightgray;
+  border: 5px ridge lightgray;
+  padding: 20px;
   margin: 60px;
+  box-shadow: 2px 2px 2px .5px black;
 }
 
 /* form styles */
 
 
+form input {
+  border: 2px inset lightgray;
+}
+
+form label {
+  margin: 5px;
+}
+
+form button {
+  margin: 10px;
+}
 
 /* card container styles */
 
 .card-container {
-  background-color: lightgreen;
+  /* background-color: lightgreen; */
   width: 100%;
   height: 100%;
   display: flex;
@@ -70,12 +94,12 @@ main form {
 
 article {
   width: 250px;
-  height: auto;
-  border: 1px solid black;
-  border-radius: 5px;
-  background: white;
+  height: 250px;
+  border: 5px ridge lightgray;
+  background: lightgray;
   margin: 20px;
-  padding: 20px;
+  padding: 0;
+  box-shadow: 2px 2px 2px .5px black;
 }
 
 article div {
@@ -94,22 +118,34 @@ article div.idea-content {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  margin: 5px;
+  margin: 0px;
 }
 
 article div h5 {
-  min-height: 25px;
-  margin: 0;
-  font-weight: bold;
-  text-transform: uppercase;
-  overflow: scroll;
+  height: 20px;
+  padding: 0;
+  margin: 0 0 0 10px;
 }
 
 article div p {
   padding: 10px;
-  height: 150px;
-  border: 1px solid black;
+  height: 201px;
+  border: 2px inset lightgray;
   overflow: scroll;
+  margin: 0;
+  background: white;
+}
+
+.card-buttons {
+  width: 100%;
+  color: white;
+  border-radius: 0;
+  background: navy;
+}
+
+button {
+  background-color: lightgray;
+  border: 2px outset lightgray;
 }
 
 button:hover {
@@ -117,5 +153,20 @@ button:hover {
 }
 
 .active {
-  background: red;
+  background: darkgrey;
+}
+
+.toolbar {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  border: 3px outset rgb(181, 181, 181);
+  height: 40px;
+  background: lightgray;
+}
+
+.toolbar button {
+  height: 30px;
+  margin: 2px;
+
 }
