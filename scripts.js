@@ -15,15 +15,44 @@ var searchIdeasButton = document.querySelector('.idea-form div button')
 
 var cardContainer = document.querySelector('.card-container')
 
+
+
+
+
+const clearFormInputs = () => {
+  const inputs = [titleInput, bodyInput, qualityInput]
+  inputs.forEach(input => input.value = '')
+}
+
+
 const saveFunction = (e) => {
   e.preventDefault();
   const newIdea = new Idea(titleInput.value, bodyInput.value)
   ideas.push(newIdea);
   newIdea.updateLocalStorage(ideas)
+  clearFormInputs();
   cardContainer.insertAdjacentHTML('afterbegin', newIdea.returnHTML())
 }
 
+const pageLoadHandler = () => {
+  instantiateIdeas();
+  populateIdeas();
+}
 
+window.addEventListener('load', pageLoadHandler);
+
+const instantiateIdeas = () => {
+  let storedIdeas = JSON.parse(localStorage.getItem('ideas'))
+  ideas = storedIdeas.map(idea => new Idea(idea.title, idea.body, idea.starred, idea.quality))
+}
+
+const populateIdeas = () => {
+  let ideasElements = ideas.reduce((acc, idea) => {
+    acc += idea.returnHTML();
+    return acc
+  }, ``)
+  cardContainer.insertAdjacentHTML('afterbegin', ideasElements)
+}
 
 saveNewIdeaButton.addEventListener('click', saveFunction)
 
