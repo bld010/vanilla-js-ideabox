@@ -28,8 +28,11 @@ updateLocalStorage = () => {
 
 const deleteIdea = (e) => {
   let id = e.target.closest('article').getAttribute('data-id')
-  ideas = ideas.filter(idea => idea.id !== parseInt(id))
+  ideas = ideas.filter(idea => idea.id !== parseInt(id));
+  console.log(ideas)
+  populateIdeas();
   updateLocalStorage();
+
 } 
 
 cardContainer.addEventListener('click', handleCardContainerClicks)
@@ -67,6 +70,7 @@ const instantiateIdeas = () => {
 
 
 const populateIdeas = () => {
+  while (cardContainer.firstChild) cardContainer.removeChild(cardContainer.firstChild)
   let ideasElements = ideas.reverse().reduce((acc, idea) => {
     acc += idea.returnHTML();
     return acc
