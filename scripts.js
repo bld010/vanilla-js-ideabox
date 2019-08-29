@@ -30,10 +30,11 @@ const handleStarClick = (e) => {
   let id = e.target.closest('article').getAttribute('data-id');
   let idea = ideas.find(idea => idea.id === parseInt(id));
   idea.starred ? idea.starred = false : idea.starred = true;
-  ideas.splice(1, ideas.indexOf(idea))
+  ideas.splice(0, ideas.indexOf(idea))
+  console.log(ideas)
   updateLocalStorage();
   e.target.classList.toggle('active')
-  console.log(e.target)
+  // console.log(e.target)
 }
 
 const updateLocalStorage = () => {
