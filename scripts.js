@@ -13,4 +13,11 @@ var addQualityButton = document.querySelector('.quality-form button');
 var saveNewIdeaButton = document.querySelector('.idea-form button:nth-of-type(1)');
 var searchIdeasButton = document.querySelector('.idea-form div button')
 
+const saveFunction = (e) => {
+  e.preventDefault();
+  const newIdea = new Idea(titleInput.value, bodyInput.value)
+  ideas.push(newIdea)
+  console.log(ideas)
+}
 
+saveNewIdeaButton.addEventListener('click', saveFunction)
