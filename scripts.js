@@ -15,8 +15,24 @@ var searchIdeasButton = document.querySelector('.idea-form div button')
 
 var cardContainer = document.querySelector('.card-container')
 
+const handleCardContainerClicks = (e) => {
 
+  if (e.target.className === 'delete') {
+    deleteIdea(e)
+  }
+}
 
+updateLocalStorage = () => {
+  localStorage.setItem('ideas', JSON.stringify(ideas))
+}
+
+const deleteIdea = (e) => {
+  let id = e.target.closest('article').getAttribute('data-id')
+  ideas = ideas.filter(idea => idea.id !== parseInt(id))
+  updateLocalStorage();
+} 
+
+cardContainer.addEventListener('click', handleCardContainerClicks)
 
 
 const clearFormInputs = () => {
@@ -24,12 +40,11 @@ const clearFormInputs = () => {
   inputs.forEach(input => input.value = '')
 }
 
-
 const saveFunction = (e) => {
   e.preventDefault();
   const newIdea = new Idea(titleInput.value, bodyInput.value)
   ideas.push(newIdea);
-  newIdea.updateLocalStorage(ideas)
+  updateLocalStorage(ideas)
   clearFormInputs();
   cardContainer.insertAdjacentHTML('afterbegin', newIdea.returnHTML())
 }
@@ -42,12 +57,17 @@ const pageLoadHandler = () => {
 window.addEventListener('load', pageLoadHandler);
 
 const instantiateIdeas = () => {
-  let storedIdeas = JSON.parse(localStorage.getItem('ideas'))
-  ideas = storedIdeas.map(idea => new Idea(idea.title, idea.body, idea.starred, idea.quality))
-}
+  if (localStorage.getItem('ideas') === null || localStorage.getItem('ideas') === undefined){
+    return;
+  } else {
+    let storedIdeas = JSON.parse(localStorage.getItem('ideas'))
+    ideas = storedIdeas.map(idea => new Idea(idea.title, idea.body, idea.starred, idea.quality))
+  }
+  }
+
 
 const populateIdeas = () => {
-  let ideasElements = ideas.reduce((acc, idea) => {
+  let ideasElements = ideas.reverse().reduce((acc, idea) => {
     acc += idea.returnHTML();
     return acc
   }, ``)

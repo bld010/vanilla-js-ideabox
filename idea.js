@@ -1,6 +1,6 @@
 class Idea {
   constructor(title, body, starred = false, quality = 0) {
-    this.id = Date.now();
+    this.id = parseInt(Date.now()*Math.random());
     this.title = title;
     this.body = body;
     this.starred = starred;
@@ -8,21 +8,11 @@ class Idea {
     this.qualities = ['Swill', 'Plausible', 'Genius']
   }
 
-
-  updateLocalStorage = (ideas) => {
-    localStorage.setItem('ideas', JSON.stringify(ideas))
-  }
-
-  deleteIdea = (index) => {
-    ideas.splice(1, index);
-    updateLocalStorage()
-  }
-
   returnHTML = () => {
     return (
-      `<article>
+      `<article data-id=${this.id}>
         <div class="card-buttons">
-          <button>x</button>
+          <button class="delete">x</button>
           <button>*</button>
         </div>
         <div class="idea-content">
