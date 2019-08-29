@@ -29,12 +29,11 @@ const handleCardContainerClicks = (e) => {
 const handleStarClick = (e) => {
   let id = e.target.closest('article').getAttribute('data-id');
   let idea = ideas.find(idea => idea.id === parseInt(id));
+  let index = ideas.indexOf(idea)
   idea.starred ? idea.starred = false : idea.starred = true;
-  ideas.splice(0, ideas.indexOf(idea))
-  console.log(ideas)
+  ideas.splice(index, 1, idea);
   updateLocalStorage();
   e.target.classList.toggle('active')
-  // console.log(e.target)
 }
 
 const updateLocalStorage = () => {
@@ -44,7 +43,6 @@ const updateLocalStorage = () => {
 const deleteIdea = (e) => {
   let id = e.target.closest('article').getAttribute('data-id')
   ideas = ideas.filter(idea => idea.id !== parseInt(id));
-  console.log(ideas)
   populateIdeas();
   updateLocalStorage();
 
